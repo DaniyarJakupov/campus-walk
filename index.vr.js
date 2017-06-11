@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Button from 'react'
 import {AppRegistry, asset, Pano, Text, View, Stylesheet, VrButton} from 'react-vr';
@@ -40,17 +41,19 @@ const places = [
 export default class Campus extends React.Component {
   constructor() {
     super();
+
     this.state = {showNav: false, place: 'sbahnstation.jpg', rotation: 130, zoom: -70};
+
   }
 
   toggleNav() {
-    this.setState({showNav: !this.state.showNav});
+    this.setState({ showNav: !this.state.showNav });
   }
 
   renderText() {
     return (
       <Text style={styles.navText}>
-        {this.state.showNav ? 'Close Navigation' : 'Open Navigation'}
+        {this.state.showNav ? "Close Navigation" : "Open Navigation"}
       </Text>
     );
   }
@@ -64,7 +67,7 @@ export default class Campus extends React.Component {
               <View
                 style={styles.navItem}
                 key={place.id}
-                onEnter={() => this.setState({place: place.image})}
+                onEnter={() => this.setState({ place: place.image })}
               >
                 <Text style={styles.navItemText}>
                   {place.name}
@@ -98,6 +101,7 @@ const styles = {
   navMenu: {
     width: 3,
     height: 1,
+
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -106,14 +110,16 @@ const styles = {
   navButton: {
     backgroundColor: '#fff',
     width: 0.5,
+
     height: 0.5,
     borderRadius: 0.2,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 0.01,
-    transform: [{translate: [-4, 2, -5]}],
+    transform: [{ translate: [-4, 2, -5] }]
   },
   navText: {
+
     textAlign: 'center',
     fontSize: 0.1,
     color: 'rebeccapurple',
@@ -122,16 +128,19 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     width: 0.7,
+
     height: 1,
     borderRadius: 0.2,
     borderWidth: 0.02,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   navItemText: {
+
     textAlign: 'center',
     fontSize: '0.11',
     color: 'steelblue',
   },
+
 };
 
-AppRegistry.registerComponent('Campus', () => Campus);
+AppRegistry.registerComponent("Campus", () => Campus);

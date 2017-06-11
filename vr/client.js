@@ -3,13 +3,13 @@
 // If you want to modify your application, start in "index.vr.js"
 
 // Auto-generated content.
-import {VRInstance} from 'react-vr-web';
+import { VRInstance } from "react-vr-web";
 
 function init(bundle, parent, options) {
-  const vr = new VRInstance(bundle, 'Campus', parent, {
+  const vr = new VRInstance(bundle, "Campus", parent, {
     // Add custom options here
     enableHotReload: true,
-    ...options,
+    ...options
   });
   vr.render = function() {
     // Any custom behavior you want to perform on each frame goes here
@@ -19,4 +19,4 @@ function init(bundle, parent, options) {
   return vr;
 }
 
-window.ReactVR = {init};
+window.ReactVR = { init };
