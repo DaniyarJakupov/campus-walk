@@ -1,23 +1,49 @@
-import React from "react";
-import { AppRegistry, asset, Pano, Text, View } from "react-vr";
+
+import React from 'react';
+import Button from 'react'
+import {AppRegistry, asset, Pano, Text, View, Stylesheet, VrButton} from 'react-vr';
 
 const places = [
   {
-    name: "S Bahn",
-    image: "sbahn.jpg",
-    id: 1
+    name: 'S Bahn Station',
+    image: 'sbahnstation.jpg',
+    id: 1,
   },
   {
-    name: "S Bahn Entrance",
-    image: "sbahn-top.jpg",
-    id: 2
-  }
+    name: 'S Bahn',
+    image: 'sbahn.jpg',
+    id: 2,
+  },
+  {
+    name: 'S Bahn Entrance',
+    image: 'sbahn-top.jpg',
+    id: 3,
+  },
+  {
+    name: 'Pfaffenwaldring 47e',
+    image: 'pfaffen47.jpg',
+    id: 4,
+  },
+
+  {
+    name: 'QUad',
+    image: 'quad.jpg',
+    id: 5,
+  },
+
+  {
+    name: 'Library & Cafeteria',
+    image: 'libcafe.jpg',
+    id: 6,
+  },
 ];
 
 export default class Campus extends React.Component {
   constructor() {
     super();
-    this.state = { showNav: false, place: "sbahn.jpg" };
+
+    this.state = {showNav: false, place: 'sbahnstation.jpg', rotation: 130, zoom: -70};
+
   }
 
   toggleNav() {
@@ -75,14 +101,16 @@ const styles = {
   navMenu: {
     width: 3,
     height: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    transform: [{ translate: [-4, 2, -6] }]
+
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    transform: [{translate: [-5, 3.5, -6]}],
   },
   navButton: {
-    backgroundColor: "#fff",
-    width: 1,
+    backgroundColor: '#fff',
+    width: 0.5,
+
     height: 0.5,
     borderRadius: 0.2,
     alignItems: "center",
@@ -91,24 +119,28 @@ const styles = {
     transform: [{ translate: [-4, 2, -5] }]
   },
   navText: {
-    textAlign: "center",
-    fontSize: 0.15,
-    color: "rebeccapurple"
+
+    textAlign: 'center',
+    fontSize: 0.1,
+    color: 'rebeccapurple',
   },
   navItem: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 0.7,
+
     height: 1,
     borderRadius: 0.2,
     borderWidth: 0.02,
     backgroundColor: "#fff"
   },
   navItemText: {
-    textAlign: "center",
-    fontSize: "0.2",
-    color: "steelblue"
-  }
+
+    textAlign: 'center',
+    fontSize: '0.11',
+    color: 'steelblue',
+  },
+
 };
 
 AppRegistry.registerComponent("Campus", () => Campus);
