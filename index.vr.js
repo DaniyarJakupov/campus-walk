@@ -5,53 +5,23 @@ import {
   Pano,
   Text,
   View,
-  Stylesheet,
+  StyleSheet,
   VrButton
 } from "react-vr";
 
-const places = [
-  {
-    name: "S Bahn Station",
-    image: "sbahnstation.jpg",
-    id: 1
-  },
-  {
-    name: "S Bahn",
-    image: "sbahn.jpg",
-    id: 2
-  },
-  {
-    name: "S Bahn Entrance",
-    image: "sbahn-top.jpg",
-    id: 3
-  },
-  {
-    name: "Pfaffenwaldring 47e",
-    image: "pfaffen47.jpg",
-    id: 4
-  },
-
-  {
-    name: "QUad",
-    image: "quad.jpg",
-    id: 5
-  },
-
-  {
-    name: "Library & Cafeteria",
-    image: "libcafe.jpg",
-    id: 6
-  }
-];
+import { mainPlaces, lib } from "./src/data";
+import Library from "./src/Library";
 
 export default class Campus extends React.Component {
   constructor() {
     super();
-
     this.state = {
       showNav: false,
-      place: "sbahnstation.jpg",
-      location: { lat: "20", lng: "75" }
+      location: {
+        name: "S-Bahn Station",
+        image: "sbahnstation.jpg",
+        id: 1
+      }
     };
   }
 
@@ -67,28 +37,17 @@ export default class Campus extends React.Component {
     );
   }
 
-  geolocation() {
-    return (
-      <Text style={styles.geoText}>
-        Latitude:
-        {this.state.location.lat}
-        , Longitude:
-        {this.state.location.lng}
-      </Text>
-    );
-  }
-
-  renderNav() {
+  renderNavOne() {
     if (this.state.showNav) {
       return (
         <View>
           <View style={styles.navMenu}>
-            {places.map(place => {
+            {mainPlaces.map(place => {
               return (
                 <View
                   style={styles.navItem}
                   key={place.id}
-                  onEnter={() => this.setState({ place: place.image })}
+                  onEnter={() => this.setState({ location: place })}
                 >
                   <Text style={styles.navItemText}>
                     {place.name}
@@ -102,41 +61,46 @@ export default class Campus extends React.Component {
     }
   }
 
+  changeState() {
+    this.setState({ location: lib[0] });
+  }
+
   render() {
     return (
       <View>
-        <Pano source={asset(this.state.place)} />
-        <View
-          style={styles.navButton}
-          onEnter={() => this.toggleNav()}
-          // onExit={() => this.toggleNav()}
-        >
-          {this.renderText()}
-        </View>
-        {this.renderNav()}
-        <View style={styles.location}>
-          {this.geolocation()}
-        </View>
+        <Pano source={asset(this.state.location.image)} />
+
+        {this.state.location.id === 1 || this.state.location.id === 2
+          ? <VrButton style={styles.navButton} onEnter={() => this.toggleNav()}>
+              {this.renderText()}
+            </VrButton>
+          : <View />}
+
+        {this.state.location.id === 1 || this.state.location.id === 2
+          ? this.renderNavOne()
+          : <View />}
+
+        {this.state.location.id === 2
+          ? <Library onEnter={this.changeState.bind(this)} />
+          : <View />}
       </View>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   navMenu: {
     width: 3,
     height: 1,
-
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    transform: [{ translate: [-5, 3.5, -6] }]
+    transform: [{ translate: [-3, 3.5, -6] }]
   },
   navButton: {
-    backgroundColor: "#fff",
-    width: 0.5,
-
-    height: 0.5,
+    backgroundColor: "rgba(200, 54, 54, 0.8)",
+    width: 1,
+    height: 1,
     borderRadius: 0.2,
     alignItems: "center",
     justifyContent: "center",
@@ -145,33 +109,23 @@ const styles = {
   },
   navText: {
     textAlign: "center",
-    fontSize: 0.1,
-    color: "rebeccapurple"
+    fontSize: 0.15,
+    color: "#fff"
   },
   navItem: {
     alignItems: "center",
     justifyContent: "center",
-    width: 0.7,
-
-    height: 1,
+    width: 1,
+    height: 0.5,
     borderRadius: 0.2,
     borderWidth: 0.02,
     backgroundColor: "#fff"
   },
   navItemText: {
     textAlign: "center",
-    fontSize: 0.11,
+    fontSize: 0.2,
     color: "steelblue"
-  },
-  location: {
-    width: 7,
-    flexDirection: "row",
-    transform: [{ translate: [-3, 1, -5] }]
-  },
-  geoText: {
-    fontSize: 0.7,
-    color: "red"
   }
-};
+});
 
 AppRegistry.registerComponent("Campus", () => Campus);
