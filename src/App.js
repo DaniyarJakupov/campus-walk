@@ -1,121 +1,91 @@
 import React from "react";
 import { asset, Pano, Text, View, StyleSheet, VrButton } from "react-vr";
+import { connect } from "react-redux";
 
-import { mainPlaces, lib } from "./data";
+import { lib, sbahn } from "./data";
+
 import Library from "./Library";
+import Library1 from "./Library1";
+import Library2 from "./Library2";
+import Library3 from "./Library3";
+import Library4 from "./Library4";
+import Library5 from "./Library5";
+import Library6 from "./Library6";
+import Library7 from "./Library7";
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showNav: false,
-      location: {
-        name: "S-Bahn Station",
-        image: "sbahnstation.jpg",
-        id: 1
-      }
-    };
+import Sbahn1 from "./Sbahn1";
+import Sbahn2 from "./Sbahn2";
+import Sbahn3 from "./Sbahn3";
+
+import Uni1 from "./Uni1";
+
+import { changeLocation } from "./redux/actions";
+
+class App extends React.Component {
+  changeState1() {
+    this.props.changeLocation(lib[0]);
   }
 
-  toggleNav() {
-    this.setState({ showNav: !this.state.showNav });
+  changeState2() {
+    this.props.changeLocation(lib[1]);
   }
 
-  renderText() {
-    return (
-      <Text style={styles.navText}>
-        {this.state.showNav ? "Close Navigation" : "Open Navigation"}
-      </Text>
-    );
+  changeState3() {
+    this.props.changeLocation(lib[2]);
+  }
+  changeState4() {
+    this.props.changeLocation(lib[3]);
+  }
+  changeState5() {
+    this.props.changeLocation(lib[4]);
+  }
+  changeState6() {
+    this.props.changeLocation(lib[5]);
+  }
+  changeState7() {
+    this.props.changeLocation(lib[6]);
+  }
+  changeState8() {
+    this.props.changeLocation(sbahn[2]);
   }
 
-  renderNavOne() {
-    if (this.state.showNav) {
-      return (
-        <View>
-          <View style={styles.navMenu}>
-            {mainPlaces.map(place => {
-              return (
-                <View
-                  style={styles.navItem}
-                  key={place.id}
-                  onEnter={() => this.setState({ location: place })}
-                >
-                  <Text style={styles.navItemText}>
-                    {place.name}
-                  </Text>
-                </View>
-              );
-            })}
-          </View>
-        </View>
-      );
-    }
+  changeStateS1() {
+    this.props.changeLocation(sbahn[0]);
   }
-
-  changeState() {
-    this.setState({ location: lib[0] });
+  changeStateS2() {
+    this.props.changeLocation(sbahn[1]);
+  }
+  changeStateS3() {
+    this.props.changeLocation(sbahn[2]);
   }
 
   render() {
     return (
       <View>
-        <Pano source={asset(this.state.location.image)} />
+        <Pano source={asset(this.props.location.image)} />
 
-        {this.state.location.id === 1 || this.state.location.id === 2
-          ? <VrButton style={styles.navButton} onEnter={() => this.toggleNav()}>
-              {this.renderText()}
-            </VrButton>
-          : <View />}
+        <Uni1 />
 
-        {this.state.location.id === 1 || this.state.location.id === 2
-          ? this.renderNavOne()
-          : <View />}
+        <Sbahn1 onEnter={this.changeStateS1.bind(this)} />
+        <Sbahn2 onEnter={this.changeStateS2.bind(this)} />
+        <Sbahn3 onEnter={this.changeStateS3.bind(this)} />
 
-        {this.state.location.id === 2
-          ? <Library onEnter={this.changeState.bind(this)} />
-          : <View />}
+        <Library onEnter={this.changeState1.bind(this)} />
+        <Library1 onEnter={this.changeState2.bind(this)} />
+        <Library2 onEnter={this.changeState3.bind(this)} />
+        <Library3 onEnter={this.changeState4.bind(this)} />
+        <Library4 onEnter={this.changeState5.bind(this)} />
+        <Library5 onEnter={this.changeState6.bind(this)} />
+        <Library6 onEnter={this.changeState7.bind(this)} />
+        <Library7 onEnter={this.changeState8.bind(this)} />
+
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  navMenu: {
-    width: 3,
-    height: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    transform: [{ translate: [-3, 3.5, -6] }]
-  },
-  navButton: {
-    backgroundColor: "rgba(200, 54, 54, 0.8)",
-    width: 1,
-    height: 1,
-    borderRadius: 0.2,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 0.01,
-    transform: [{ translate: [-4, 2, -5] }]
-  },
-  navText: {
-    textAlign: "center",
-    fontSize: 0.15,
-    color: "#fff"
-  },
-  navItem: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 1,
-    height: 0.5,
-    borderRadius: 0.2,
-    borderWidth: 0.02,
-    backgroundColor: "#fff"
-  },
-  navItemText: {
-    textAlign: "center",
-    fontSize: 0.2,
-    color: "steelblue"
-  }
+const mapStateToProps = state => ({
+  location: state.location
 });
+
+export default connect(mapStateToProps, { changeLocation })(App);
