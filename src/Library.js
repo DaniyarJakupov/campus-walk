@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { asset, Pano, Text, View, StyleSheet, VrButton } from "react-vr";
 import { connect } from "react-redux";
 
+import Navigation from "./components/Navigation";
+
 import { changeLocation } from "./redux/actions";
 
 class Library extends Component {
@@ -11,10 +13,14 @@ class Library extends Component {
 
   enterLib(onEnter) {
     return (
-      <View style={styles.library} onEnter={onEnter}>
-        <Text style={styles.librarySign}>
-          Enter the Library
-        </Text>
+      <View>
+        <Navigation />
+
+        <View style={styles.library} onEnter={onEnter}>
+          <Text style={styles.librarySign}>
+            Enter the Library
+          </Text>
+        </View>
       </View>
     );
   }

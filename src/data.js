@@ -1,5 +1,10 @@
 export const mainPlaces = [
   {
+    name: "V47",
+    image: "pfaffen47.jpg",
+    id: 22
+  },
+  {
     name: "S-Bahn Station",
     image: "sbahnstation.jpg",
     id: 1
@@ -8,6 +13,36 @@ export const mainPlaces = [
     name: "Library",
     image: "libcafe.jpg",
     id: 2
+  },
+  {
+    name: "CS Building",
+    image: "cs.jpg",
+    id: 10
+  },
+  {
+    name: "Bus Station",
+    image: "bus.jpg",
+    id: 11
+  },
+  {
+    name: "Universum",
+    image: "universum.jpg",
+    id: 12
+  },
+  {
+    name: "Food Store",
+    image: "frischemarkt.jpg",
+    id: 13
+  },
+  {
+    name: "Cafeteria",
+    image: "cafeteria1.jpg",
+    id: 14
+  },
+  {
+    name: "Mensa",
+    image: "mensa1.jpg",
+    id: 15
   }
 ];
 
@@ -59,24 +94,5 @@ export const sbahn = [
     name: "S Bahn Entrance",
     image: "sbahn-top.jpg",
     id: 21
-  },
-  {
-    name: "Pfaffenwaldring 47",
-    image: "pfaffen47.jpg",
-    id: 22
-  }
-];
-
-const places = [
-  {
-    name: "QUad",
-    image: "quad.jpg",
-    id: 5
-  },
-
-  {
-    name: "Library & Cafeteria",
-    image: "libcafe.jpg",
-    id: 6
   }
 ];

@@ -2,7 +2,7 @@ import React from "react";
 import { asset, Pano, Text, View, StyleSheet, VrButton } from "react-vr";
 import { connect } from "react-redux";
 
-import { lib, sbahn } from "./data";
+import { lib, sbahn, mainPlaces } from "./data";
 
 import Library from "./Library";
 import Library1 from "./Library1";
@@ -18,6 +18,12 @@ import Sbahn2 from "./Sbahn2";
 import Sbahn3 from "./Sbahn3";
 
 import Uni1 from "./Uni1";
+import Cs from "./Cs";
+import Universum from "./Universum";
+import BusStation from "./BusStation";
+import Frischemarkt from "./Frischemarkt";
+import Cafeteria from "./Cafeteria";
+import Mensa from "./Mensa";
 
 import { changeLocation } from "./redux/actions";
 
@@ -56,7 +62,7 @@ class App extends React.Component {
     this.props.changeLocation(sbahn[1]);
   }
   changeStateS3() {
-    this.props.changeLocation(sbahn[2]);
+    this.props.changeLocation(mainPlaces[0]);
   }
 
   render() {
@@ -65,6 +71,12 @@ class App extends React.Component {
         <Pano source={asset(this.props.location.image)} />
 
         <Uni1 />
+        <Cs />
+        <Universum />
+        <BusStation />
+        <Frischemarkt />
+        <Cafeteria />
+        <Mensa />
 
         <Sbahn1 onEnter={this.changeStateS1.bind(this)} />
         <Sbahn2 onEnter={this.changeStateS2.bind(this)} />
