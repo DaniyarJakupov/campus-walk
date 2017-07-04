@@ -1,13 +1,41 @@
 import React, { Component } from "react";
-import { asset, Text, View, StyleSheet, VrButton } from "react-vr";
+import {
+  asset,
+  Text,
+  View,
+  StyleSheet,
+  VrButton,
+  Video,
+  VideoControl,
+  MediaPlayerState
+} from "react-vr";
 import { connect } from "react-redux";
 
 class Sbahn2 extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      playerState: new MediaPlayerState({ autoPlay: true, muted: true }) // init with muted, autoPlay
+    };
   }
 
-  insideLibTwo(onEnter) {
+  renderVideo() {
+    return (
+      <View>
+        <Video
+          style={styles.videoView}
+          source={asset("stamp.mp4")}
+          playerState={this.state.playerState}
+        />
+        <VideoControl
+          style={styles.control}
+          playerState={this.state.playerState}
+        />
+      </View>
+    );
+  }
+
+  renderSigns(onEnter) {
     return (
       <View>
         <View style={styles.inLib2} onEnter={onEnter}>
@@ -38,8 +66,10 @@ class Sbahn2 extends Component {
     return (
       <View>
         {this.props.location.id === 20
-          ? this.insideLibTwo(this.props.onEnter)
+          ? this.renderSigns(this.props.onEnter)
           : <View />}
+
+        {this.props.location.id === 20 ? this.renderVideo() : <View />}
       </View>
     );
   }
@@ -86,6 +116,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 0.2,
     color: "blue"
+  },
+  videoView: {
+    width: 6.0,
+    height: 4.0,
+    transform: [{ translate: [15, 5, 2] }, { rotateY: -100 }],
+    borderWidth: 0.02,
+    borderColor: "red"
+  },
+  control: {
+    height: 0.5,
+    width: 7,
+    transform: [{ translate: [12, 4.8, 2] }, { rotateY: -100 }],
+    borderWidth: 0.01,
+    borderColor: "crimson"
   }
 });
 

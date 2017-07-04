@@ -52,7 +52,7 @@ class App extends React.Component {
     this.props.changeLocation(lib[6]);
   }
   changeState8() {
-    this.props.changeLocation(sbahn[2]);
+    this.props.changeLocation(mainPlaces[0]);
   }
 
   changeStateS1() {
